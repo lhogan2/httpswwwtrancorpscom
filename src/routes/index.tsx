@@ -241,14 +241,10 @@ function About() {
             </p>
 
             <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-surface">
-              <img
-                src={haoAsset.url}
-                alt="Hao Tran, founder of TransCorps Consulting"
-                className="aspect-[4/3] w-full object-cover object-top"
-              />
-              <div className="border-t border-border p-5">
-                <p className="font-display text-lg font-semibold">Hao Tran</p>
-                <p className="text-sm text-muted-foreground">Founder · Principal Consultant</p>
+              <div className="flex aspect-[4/3] w-full items-center justify-center bg-surface">
+                <span className="font-display text-sm uppercase tracking-wider text-muted-foreground">
+                  Founder · Principal Consultant
+                </span>
               </div>
             </div>
           </div>
