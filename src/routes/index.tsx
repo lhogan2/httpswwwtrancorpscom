@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, MapPin, Calendar, Briefcase, Network, Cpu, Radio, CheckCircle2, Menu, X } from "lucide-react";
 import logoAsset from "@/assets/logo.png.asset.json";
-import haoAsset from "@/assets/hao.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
