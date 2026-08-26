@@ -280,12 +280,11 @@ function About() {
               href="https://trancorps.zohorecruit.com/jobs/Careers"
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-6 inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-300 hover:border-brand/50 hover:bg-surface-elevated hover:text-brand"
+              className="group mt-6 inline-flex items-center gap-3 rounded-xl border border-brand/30 bg-brand/10 px-5 py-3.5 text-base font-semibold text-brand transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-brand hover:bg-brand hover:text-brand-foreground hover:shadow-[var(--shadow-brand)]"
             >
-              <Briefcase className="h-4 w-4 text-brand" />
-              View job openings
-              <span className="text-muted-foreground group-hover:text-brand">trancorps.zohorecruit.com</span>
-              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+              <Briefcase className="h-5 w-5" />
+              View current job openings
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>
         </div>
@@ -352,6 +351,26 @@ function Contact() {
                   </li>
                 ))}
               </ul>
+
+              <a
+                href="https://trancorps.zohorecruit.com/jobs/Careers"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-8 flex items-center gap-4 rounded-2xl border border-border bg-background p-5 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-brand/60 hover:bg-surface-elevated hover:shadow-[var(--shadow-card)]"
+              >
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-brand/30 bg-brand/10 text-brand transition-all duration-500 ease-out group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground">
+                  <Briefcase className="h-5 w-5" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block font-display text-lg font-semibold tracking-tight text-foreground transition-colors duration-300 group-hover:text-brand">
+                    View current job openings
+                  </span>
+                  <span className="block text-sm text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
+                    Browse live roles on our careers board
+                  </span>
+                </span>
+                <ArrowRight className="h-5 w-5 shrink-0 text-brand transition-transform duration-500 ease-out group-hover:translate-x-1" />
+              </a>
             </div>
 
             <form
