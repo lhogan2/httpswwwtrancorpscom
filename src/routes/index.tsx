@@ -275,6 +275,18 @@ function About() {
                 </div>
               ))}
             </div>
+
+            <a
+              href="https://trancorps.zohorecruit.com/jobs/Careers"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-6 inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-300 hover:border-brand/50 hover:bg-surface-elevated hover:text-brand"
+            >
+              <Briefcase className="h-4 w-4 text-brand" />
+              View job openings
+              <span className="text-muted-foreground group-hover:text-brand">trancorps.zohorecruit.com</span>
+              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
           </div>
         </div>
       </div>
