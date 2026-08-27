@@ -307,8 +307,24 @@ function Fact({
 }
 
 function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [form, setForm] = useState({ name: "", email: "", role: "candidate", message: "" });
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("submitting");
+    const { error } = await supabase.from("contact_submissions").insert({
+      name: form.name,
+      email: form.email,
+      role: form.role,
+      message: form.message || null,
+    });
+    if (error) {
+      setStatus("error");
+    } else {
+      setStatus("success");
+    }
+  }
 
   return (
     <section id="contact" className="relative py-24 sm:py-32">
