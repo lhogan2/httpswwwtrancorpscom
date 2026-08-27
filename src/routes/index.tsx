@@ -381,13 +381,10 @@ function Contact() {
             </div>
 
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSubmitted(true);
-              }}
+              onSubmit={handleSubmit}
               className="relative rounded-2xl border border-border bg-background p-5 sm:p-7"
             >
-              {submitted ? (
+              {status === "success" ? (
                 <div className="flex h-full min-h-[360px] flex-col items-center justify-center text-center">
                   <div className="grid h-14 w-14 place-items-center rounded-full border border-brand/40 bg-brand/10 text-brand">
                     <CheckCircle2 className="h-7 w-7" />
@@ -399,12 +396,29 @@ function Contact() {
                   <button
                     type="button"
                     onClick={() => {
-                      setSubmitted(false);
+                      setStatus("idle");
                       setForm({ name: "", email: "", role: "candidate", message: "" });
                     }}
                     className="mt-6 text-xs uppercase tracking-wider text-brand hover:underline"
                   >
                     Send another
+                  </button>
+                </div>
+              ) : status === "error" ? (
+                <div className="flex h-full min-h-[360px] flex-col items-center justify-center text-center">
+                  <div className="grid h-14 w-14 place-items-center rounded-full border border-destructive/40 bg-destructive/10 text-destructive">
+                    <X className="h-7 w-7" />
+                  </div>
+                  <h3 className="mt-5 font-display text-xl font-semibold">Something went wrong.</h3>
+                  <p className="mt-2 max-w-xs text-sm text-muted-foreground">
+                    Your submission didn't go through. Please try again or email us directly.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setStatus("idle")}
+                    className="mt-6 text-xs uppercase tracking-wider text-brand hover:underline"
+                  >
+                    Back to form
                   </button>
                 </div>
               ) : (
@@ -455,10 +469,13 @@ function Contact() {
                   </Field>
                   <button
                     type="submit"
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand px-5 py-3 text-sm font-semibold text-brand-foreground shadow-[var(--shadow-brand)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
+                    disabled={status === "submitting"}
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand px-5 py-3 text-sm font-semibold text-brand-foreground shadow-[var(--shadow-brand)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                   >
-                    {form.role === "candidate" ? "Submit resume" : "Request consultation"}
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    {status === "submitting" ? "Sending…" : form.role === "candidate" ? "Submit resume" : "Request consultation"}
+                    {status !== "submitting" && (
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    )}
                   </button>
                 </div>
               )}
