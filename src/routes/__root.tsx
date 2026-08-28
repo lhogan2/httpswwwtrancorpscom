@@ -87,8 +87,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "TranCorps Consulting" },
       { name: "twitter:description", content: "TransCorps Digital Hub is a professional website for a premium workforce solutions and recruitment company." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/95b625c2-8528-4939-a08b-2963a81febec/id-preview-28ccb7c7--d00ba749-f442-4b4c-a11c-fefedaabfa46.lovable.app-1782678372427.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/95b625c2-8528-4939-a08b-2963a81febec/id-preview-28ccb7c7--d00ba749-f442-4b4c-a11c-fefedaabfa46.lovable.app-1782678372427.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

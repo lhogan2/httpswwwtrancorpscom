@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, MapPin, Calendar, Briefcase, Network, Cpu, Radio, CheckCircle2, Menu, X } from "lucide-react";
-import logoAsset from "@/assets/logo.png.asset.json";
 import { supabase } from "@/integrations/supabase/client";
 
 
@@ -19,7 +18,8 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Specialized IT and Telecommunications consulting and workforce solutions.",
       },
-      { property: "og:image", content: logoAsset.url },
+      { property: "og:image", content: "https://httpswwwtrancorpscom.lovable.app/logo.png" },
+      { name: "twitter:image", content: "https://httpswwwtrancorpscom.lovable.app/logo.png" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -39,7 +39,7 @@ function Navbar() {
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-10">
         <a href="#home" className="flex items-center gap-2.5 group">
           <span className="grid h-9 w-9 place-items-center rounded-md bg-background ring-1 ring-border overflow-hidden">
-            <img src={logoAsset.url} alt="TransCorps logo" className="h-9 w-9 object-cover" />
+            <img src="/logo.png" alt="TransCorps logo" className="h-9 w-9 object-cover" />
           </span>
           <span className="font-display text-lg font-semibold tracking-tight">
             Trans<span className="text-brand">Corps</span>
@@ -175,7 +175,7 @@ function Hero() {
               style={{ boxShadow: "var(--shadow-card)" }}
             >
               <img
-                src={logoAsset.url}
+                src="/logo.png"
                 alt="TransCorps Consulting"
                 className="mx-auto aspect-[3/2] w-full max-w-sm rounded-lg object-cover"
               />
@@ -524,7 +524,7 @@ function Footer() {
     <footer className="border-t border-border py-10">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-xs text-muted-foreground sm:flex-row sm:px-6 lg:px-10">
         <div className="flex items-center gap-2">
-          <img src={logoAsset.url} alt="" className="h-6 w-6 rounded object-cover" />
+          <img src="/logo.png" alt="" className="h-6 w-6 rounded object-cover" />
           <span>© {new Date().getFullYear()} TransCorps Consulting · Haymarket, VA</span>
         </div>
         <div className="flex items-center gap-5">
