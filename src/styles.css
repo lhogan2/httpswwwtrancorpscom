@@ -118,6 +118,54 @@
     background: color-mix(in oklab, var(--brand) 40%, transparent);
     color: var(--foreground);
   }
+
+  /* WCAG 2.4.7 / 2.4.11 — visible keyboard focus on every interactive element */
+  :focus-visible {
+    outline: 2px solid var(--brand-glow);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+  a:focus-visible,
+  button:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  input:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--brand-glow);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 0.5rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  background: var(--brand);
+  color: var(--brand-foreground);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: transform 150ms ease-out;
+}
+
+@utility skip-link-focus {
+  transform: translateY(0);
 }
 
 @utility grid-bg {
