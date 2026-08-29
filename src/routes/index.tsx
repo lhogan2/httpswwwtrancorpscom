@@ -36,8 +36,8 @@ function Navbar() {
   ];
   return (
     <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-md bg-background/55 border-b border-border/60">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-10">
-        <a href="#home" className="flex items-center gap-2.5 group">
+      <nav aria-label="Main" className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-10">
+        <a href="#home" aria-label="TransCorps — go to top of page" className="flex items-center gap-2.5 group">
           <span className="grid h-9 w-9 place-items-center rounded-md bg-background ring-1 ring-border overflow-hidden">
             <img src="/logo.png" alt="TransCorps logo" className="h-9 w-9 object-cover" />
           </span>
@@ -71,15 +71,18 @@ function Navbar() {
         </ul>
 
         <button
+          type="button"
           onClick={() => setOpen((o) => !o)}
           className="md:hidden grid h-10 w-10 place-items-center rounded-md border border-border text-foreground"
-          aria-label="Toggle menu"
+          aria-label={open ? "Close main menu" : "Open main menu"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </nav>
       {open && (
-        <div className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur">
+        <div id="mobile-menu" className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur">
           <div className="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6">
             {links.map((l) => (
               <a
@@ -109,6 +112,7 @@ function Hero() {
   return (
     <section
       id="home"
+      aria-labelledby="hero-heading"
       className="relative isolate overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28"
       style={{ background: "var(--gradient-hero)" }}
     >
@@ -120,7 +124,7 @@ function Hero() {
               <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
               Workforce Solutions · Est. 2021
             </div>
-            <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.75rem]">
+            <h1 id="hero-heading" className="mt-6 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.75rem]">
               Modernize your <span className="text-brand">digital presence</span>.
               <br className="hidden sm:block" />
               Compete. Win. Grow.
@@ -176,7 +180,8 @@ function Hero() {
             >
               <img
                 src="/logo.png"
-                alt="TransCorps Consulting"
+                alt=""
+                aria-hidden="true"
                 className="mx-auto aspect-[3/2] w-full max-w-sm rounded-lg object-cover"
               />
               <div className="mt-8 grid grid-cols-2 gap-3">
@@ -226,12 +231,12 @@ function About() {
   ];
 
   return (
-    <section id="about" className="relative py-24 sm:py-32">
+    <section id="about" aria-labelledby="about-heading" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
           <div className="min-w-0">
             <p className="text-xs uppercase tracking-[0.2em] text-brand">About</p>
-            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h2 id="about-heading" className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
               A one-person practice with enterprise discipline.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">
@@ -327,7 +332,7 @@ function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32">
+    <section id="contact" aria-labelledby="contact-heading" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10">
         <div
           className="relative overflow-hidden rounded-3xl border border-border bg-surface p-6 sm:p-12 lg:p-16"
@@ -337,7 +342,7 @@ function Contact() {
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
             <div className="min-w-0">
               <p className="text-xs uppercase tracking-[0.2em] text-brand">Get in touch</p>
-              <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h2 id="contact-heading" className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
                 Drop your resume — or request a consultation.
               </h2>
               <p className="mt-5 text-base leading-relaxed text-muted-foreground">
@@ -371,6 +376,7 @@ function Contact() {
                 <span className="min-w-0 flex-1">
                   <span className="block font-display text-lg font-semibold tracking-tight text-foreground transition-colors duration-300 group-hover:text-brand">
                     View current job openings
+                    <span className="sr-only"> (opens in a new tab)</span>
                   </span>
                   <span className="block text-sm text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
                     Browse live roles on our careers board
@@ -382,8 +388,19 @@ function Contact() {
 
             <form
               onSubmit={handleSubmit}
+              aria-labelledby="contact-form-heading"
               className="relative rounded-2xl border border-border bg-background p-5 sm:p-7"
             >
+              <h3 id="contact-form-heading" className="sr-only">
+                Contact TransCorps
+              </h3>
+              <p aria-live="polite" role="status" className="sr-only">
+                {status === "submitting"
+                  ? "Sending your submission…"
+                  : status === "success"
+                    ? "Your submission was sent successfully."
+                    : ""}
+              </p>
               {status === "success" ? (
                 <div className="flex h-full min-h-[360px] flex-col items-center justify-center text-center">
                   <div className="grid h-14 w-14 place-items-center rounded-full border border-brand/40 bg-brand/10 text-brand">
@@ -405,7 +422,7 @@ function Contact() {
                   </button>
                 </div>
               ) : status === "error" ? (
-                <div className="flex h-full min-h-[360px] flex-col items-center justify-center text-center">
+                <div role="alert" className="flex h-full min-h-[360px] flex-col items-center justify-center text-center">
                   <div className="grid h-14 w-14 place-items-center rounded-full border border-destructive/40 bg-destructive/10 text-destructive">
                     <X className="h-7 w-7" />
                   </div>
@@ -423,9 +440,13 @@ function Contact() {
                 </div>
               ) : (
                 <div className="space-y-5">
-                  <Field label="Full name">
+                  <Field label="Full name" htmlFor="field-name">
                     <input
+                      id="field-name"
+                      name="name"
+                      autoComplete="name"
                       required
+                      aria-required="true"
                       maxLength={100}
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -433,9 +454,13 @@ function Contact() {
                       placeholder="Jane Doe"
                     />
                   </Field>
-                  <Field label="Email address">
+                  <Field label="Email address" htmlFor="field-email">
                     <input
+                      id="field-email"
+                      name="email"
+                      autoComplete="email"
                       required
+                      aria-required="true"
                       type="email"
                       maxLength={255}
                       value={form.email}
@@ -444,9 +469,11 @@ function Contact() {
                       placeholder="jane@company.com"
                     />
                   </Field>
-                  <Field label="I am a">
+                  <Field label="I am a" htmlFor="field-role">
                     <div className="relative">
                       <select
+                        id="field-role"
+                        name="role"
                         value={form.role}
                         onChange={(e) => setForm({ ...form, role: e.target.value })}
                         className="form-input appearance-none pr-10"
@@ -457,8 +484,10 @@ function Contact() {
                       <ArrowRight className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 rotate-90 text-muted-foreground" />
                     </div>
                   </Field>
-                  <Field label="Message (optional)">
+                  <Field label="Message (optional)" htmlFor="field-message">
                     <textarea
+                      id="field-message"
+                      name="message"
                       maxLength={1000}
                       rows={3}
                       value={form.message}
@@ -470,6 +499,7 @@ function Contact() {
                   <button
                     type="submit"
                     disabled={status === "submitting"}
+                    aria-busy={status === "submitting"}
                     className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand px-5 py-3 text-sm font-semibold text-brand-foreground shadow-[var(--shadow-brand)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                   >
                     {status === "submitting" ? "Sending…" : form.role === "candidate" ? "Submit resume" : "Request consultation"}
@@ -508,14 +538,25 @@ function Contact() {
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  htmlFor,
+  children,
+}: {
+  label: string;
+  htmlFor: string;
+  children: React.ReactNode;
+}) {
   return (
-    <label className="block">
-      <span className="mb-1.5 block text-[11px] uppercase tracking-wider text-muted-foreground">
+    <div className="block">
+      <label
+        htmlFor={htmlFor}
+        className="mb-1.5 block text-xs uppercase tracking-wider text-muted-foreground"
+      >
         {label}
-      </span>
+      </label>
       {children}
-    </label>
+    </div>
   );
 }
 
@@ -527,11 +568,11 @@ function Footer() {
           <img src="/logo.png" alt="" className="h-6 w-6 rounded object-cover" />
           <span>© {new Date().getFullYear()} TransCorps Consulting · Haymarket, VA</span>
         </div>
-        <div className="flex items-center gap-5">
+        <nav aria-label="Footer" className="flex items-center gap-5">
           <a href="#home" className="hover:text-foreground transition-colors">Home</a>
           <a href="#about" className="hover:text-foreground transition-colors">About</a>
           <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
-        </div>
+        </nav>
       </div>
     </footer>
   );
@@ -539,9 +580,12 @@ function Footer() {
 
 function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground antialiased">
+    <div className="min-h-dvh bg-background text-foreground antialiased">
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <Navbar />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <About />
         <Contact />
