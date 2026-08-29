@@ -103,17 +103,27 @@ export async function writeAuditLog(event: AuditEvent): Promise<void> {
  * Server-side authorization. Throws when the signed-in user lacks every
  * allowed role. Always call this before privileged work — a route guard is UX,
  * this is the security boundary.
+ *
+ * Reads user_roles directly under RLS (users may read only their own roles);
+ * the SECURITY DEFINER helper lives in a private schema and is not callable
+ * over the API.
  */
 export async function assertRole(
   supabase: {
-    rpc: (fn: "has_role", args: { _user_id: string; _role: AppRole }) => PromiseLike<{ data: unknown }>;
+    from: (table: "user_roles") => {
+      select: (cols: string) => {
+        eq: (col: string, val: string) => PromiseLike<{ data: { role: string }[] | null }>;
+      };
+    };
   },
   userId: string,
   allowed: AppRole[],
 ): Promise<AppRole> {
+  const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId);
+  const held = new Set((data ?? []).map((r) => r.role));
   for (const role of allowed) {
-    const { data } = await supabase.rpc("has_role", { _user_id: userId, _role: role });
-    if (data === true) return role;
+    if (held.has(role)) return role;
   }
   throw new Error("Forbidden: insufficient permissions");
 }
+
