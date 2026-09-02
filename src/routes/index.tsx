@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, MapPin, Calendar, Briefcase, Network, Cpu, Radio, CheckCircle2, Menu, X } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 
 
 export const Route = createFileRoute("/")({
@@ -312,25 +311,6 @@ function Fact({
 }
 
 function Contact() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [form, setForm] = useState({ name: "", email: "", role: "candidate", message: "" });
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setStatus("submitting");
-    const { error } = await supabase.from("contact_submissions").insert({
-      name: form.name,
-      email: form.email,
-      role: form.role,
-      message: form.message || null,
-    });
-    if (error) {
-      setStatus("error");
-    } else {
-      setStatus("success");
-    }
-  }
-
   return (
     <section id="contact" aria-labelledby="contact-heading" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10">
@@ -339,224 +319,54 @@ function Contact() {
           style={{ boxShadow: "var(--shadow-card)" }}
         >
           <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand/20 blur-3xl" />
-          <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-            <div className="min-w-0">
-              <p className="text-xs uppercase tracking-[0.2em] text-brand">Get in touch</p>
-              <h2 id="contact-heading" className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-                Drop your resume — or request a consultation.
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                Whether you're a candidate looking for your next role or a business that needs
-                senior IT or telecom expertise on a project, we'll respond personally within one
-                business day.
-              </p>
+          <div className="max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.2em] text-brand">Get in touch</p>
+            <h2 id="contact-heading" className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+              Let's work together.
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              Whether you're a candidate looking for your next role or a business that needs
+              senior IT or telecom expertise on a project, reach out — you'll hear back personally
+              within one business day.
+            </p>
 
-              <ul className="mt-8 space-y-3 text-sm">
-                {[
-                  "Owner-led communication — no account managers in the middle.",
-                  "Specialized in IT & Telecommunications engagements.",
-                  "Based in Haymarket, VA — serving clients nationwide.",
-                ].map((b) => (
-                  <li key={b} className="flex items-start gap-3 text-muted-foreground">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
+            <ul className="mt-8 space-y-3 text-sm">
+              {[
+                "Owner-led communication — no account managers in the middle.",
+                "Specialized in IT & Telecommunications engagements.",
+                "Based in Haymarket, VA — serving clients nationwide.",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-3 text-muted-foreground">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
 
-              <a
-                href="https://trancorps.zohorecruit.com/jobs/Careers"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group mt-8 flex items-center gap-4 rounded-2xl border border-border bg-background p-5 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-brand/60 hover:bg-surface-elevated hover:shadow-[var(--shadow-card)]"
-              >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-brand/30 bg-brand/10 text-brand transition-all duration-500 ease-out group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground">
-                  <Briefcase className="h-5 w-5" />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block font-display text-lg font-semibold tracking-tight text-foreground transition-colors duration-300 group-hover:text-brand">
-                    View current job openings
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </span>
-                  <span className="block text-sm text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
-                    Browse live roles on our careers board
-                  </span>
-                </span>
-                <ArrowRight className="h-5 w-5 shrink-0 text-brand transition-transform duration-500 ease-out group-hover:translate-x-1" />
-              </a>
-            </div>
-
-            <form
-              onSubmit={handleSubmit}
-              aria-labelledby="contact-form-heading"
-              className="relative rounded-2xl border border-border bg-background p-5 sm:p-7"
+            <a
+              href="https://trancorps.zohorecruit.com/jobs/Careers"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-8 flex items-center gap-4 rounded-2xl border border-border bg-background p-5 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-brand/60 hover:bg-surface-elevated hover:shadow-[var(--shadow-card)]"
             >
-              <h3 id="contact-form-heading" className="sr-only">
-                Contact TransCorps
-              </h3>
-              <p aria-live="polite" role="status" className="sr-only">
-                {status === "submitting"
-                  ? "Sending your submission…"
-                  : status === "success"
-                    ? "Your submission was sent successfully."
-                    : ""}
-              </p>
-              {status === "success" ? (
-                <div className="flex h-full min-h-[360px] flex-col items-center justify-center text-center">
-                  <div className="grid h-14 w-14 place-items-center rounded-full border border-brand/40 bg-brand/10 text-brand">
-                    <CheckCircle2 className="h-7 w-7" />
-                  </div>
-                  <h3 className="mt-5 font-display text-xl font-semibold">Thanks, {form.name || "we got it"}.</h3>
-                  <p className="mt-2 max-w-xs text-sm text-muted-foreground">
-                    We'll reach out at {form.email || "your email"} within one business day.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setStatus("idle");
-                      setForm({ name: "", email: "", role: "candidate", message: "" });
-                    }}
-                    className="mt-6 text-xs uppercase tracking-wider text-brand hover:underline"
-                  >
-                    Send another
-                  </button>
-                </div>
-              ) : status === "error" ? (
-                <div role="alert" className="flex h-full min-h-[360px] flex-col items-center justify-center text-center">
-                  <div className="grid h-14 w-14 place-items-center rounded-full border border-destructive/40 bg-destructive/10 text-destructive">
-                    <X className="h-7 w-7" />
-                  </div>
-                  <h3 className="mt-5 font-display text-xl font-semibold">Something went wrong.</h3>
-                  <p className="mt-2 max-w-xs text-sm text-muted-foreground">
-                    Your submission didn't go through. Please try again or email us directly.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setStatus("idle")}
-                    className="mt-6 text-xs uppercase tracking-wider text-brand hover:underline"
-                  >
-                    Back to form
-                  </button>
-                </div>
-              ) : (
-                <div className="space-y-5">
-                  <Field label="Full name" htmlFor="field-name">
-                    <input
-                      id="field-name"
-                      name="name"
-                      autoComplete="name"
-                      required
-                      aria-required="true"
-                      maxLength={100}
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="form-input"
-                      placeholder="Jane Doe"
-                    />
-                  </Field>
-                  <Field label="Email address" htmlFor="field-email">
-                    <input
-                      id="field-email"
-                      name="email"
-                      autoComplete="email"
-                      required
-                      aria-required="true"
-                      type="email"
-                      maxLength={255}
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="form-input"
-                      placeholder="jane@company.com"
-                    />
-                  </Field>
-                  <Field label="I am a" htmlFor="field-role">
-                    <div className="relative">
-                      <select
-                        id="field-role"
-                        name="role"
-                        value={form.role}
-                        onChange={(e) => setForm({ ...form, role: e.target.value })}
-                        className="form-input appearance-none pr-10"
-                      >
-                        <option value="candidate">Candidate — looking for opportunities</option>
-                        <option value="employer">Employer — looking to hire / consult</option>
-                      </select>
-                      <ArrowRight className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 rotate-90 text-muted-foreground" />
-                    </div>
-                  </Field>
-                  <Field label="Message (optional)" htmlFor="field-message">
-                    <textarea
-                      id="field-message"
-                      name="message"
-                      maxLength={1000}
-                      rows={3}
-                      value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="form-input resize-none"
-                      placeholder="Tell us about your role or project…"
-                    />
-                  </Field>
-                  <button
-                    type="submit"
-                    disabled={status === "submitting"}
-                    aria-busy={status === "submitting"}
-                    className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand px-5 py-3 text-sm font-semibold text-brand-foreground shadow-[var(--shadow-brand)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
-                  >
-                    {status === "submitting" ? "Sending…" : form.role === "candidate" ? "Submit resume" : "Request consultation"}
-                    {status !== "submitting" && (
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                    )}
-                  </button>
-                </div>
-              )}
-            </form>
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-brand/30 bg-brand/10 text-brand transition-all duration-500 ease-out group-hover:scale-105 group-hover:bg-brand group-hover:text-brand-foreground">
+                <Briefcase className="h-5 w-5" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block font-display text-lg font-semibold tracking-tight text-foreground transition-colors duration-300 group-hover:text-brand">
+                  View current job openings
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </span>
+                <span className="block text-sm text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
+                  Browse live roles on our careers board
+                </span>
+              </span>
+              <ArrowRight className="h-5 w-5 shrink-0 text-brand transition-transform duration-500 ease-out group-hover:translate-x-1" />
+            </a>
           </div>
         </div>
       </div>
-
-      <style>{`
-        .form-input {
-          width: 100%;
-          background: transparent;
-          border: 1px solid var(--border);
-          border-radius: var(--radius);
-          padding: 0.7rem 0.85rem;
-          font-size: 0.875rem;
-          color: var(--foreground);
-          transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth), background var(--transition-smooth);
-        }
-        .form-input::placeholder { color: color-mix(in oklab, var(--muted-foreground) 80%, transparent); }
-        .form-input:focus {
-          outline: none;
-          border-color: var(--brand);
-          box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 25%, transparent);
-          background: color-mix(in oklab, var(--brand) 4%, transparent);
-        }
-        .form-input option { background: var(--surface); color: var(--foreground); }
-      `}</style>
     </section>
-  );
-}
-
-function Field({
-  label,
-  htmlFor,
-  children,
-}: {
-  label: string;
-  htmlFor: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="block">
-      <label
-        htmlFor={htmlFor}
-        className="mb-1.5 block text-xs uppercase tracking-wider text-muted-foreground"
-      >
-        {label}
-      </label>
-      {children}
-    </div>
   );
 }
 
