@@ -244,27 +244,6 @@ function About() {
   );
 }
 
-function Fact({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: typeof Calendar;
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="flex items-center gap-4 rounded-xl border border-border bg-surface px-5 py-4">
-      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-background text-brand">
-        <Icon className="h-4 w-4" />
-      </div>
-      <div className="min-w-0">
-        <p className="text-[11px] uppercase tracking-wider text-muted-foreground">{label}</p>
-        <p className="font-display text-base font-semibold">{value}</p>
-      </div>
-    </div>
-  );
-}
 
 function Contact() {
   return (
