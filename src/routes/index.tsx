@@ -119,10 +119,6 @@ function Hero() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
           <div className="min-w-0">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
-              Workforce Solutions · Est. 2021
-            </div>
             <h1 id="hero-heading" className="mt-6 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.75rem]">
               Modernize your <span className="text-brand">digital presence</span>.
               <br className="hidden sm:block" />
@@ -136,39 +132,6 @@ function Hero() {
               — so I can compete with other consulting firms and attract more clients. That's the
               brief TransCorps is built around.
             </p>
-
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <a
-                href="#contact"
-                className="group inline-flex items-center gap-2 rounded-md bg-brand px-5 py-3 text-sm font-semibold text-brand-foreground shadow-[var(--shadow-brand)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0"
-              >
-                Request a consultation
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
-              <a
-                href="#about"
-                className="inline-flex items-center gap-2 rounded-md border border-border bg-surface/60 px-5 py-3 text-sm font-medium text-foreground transition-all duration-300 hover:border-brand/50 hover:bg-surface-elevated"
-              >
-                About the firm
-              </a>
-            </div>
-
-            <dl className="mt-12 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-border bg-border">
-              {[
-                { k: "2021", v: "Established" },
-                { k: "VA", v: "Haymarket, USA" },
-                { k: "1:1", v: "Owner-led service" },
-              ].map((s) => (
-                <div key={s.v} className="bg-background px-4 py-5 sm:px-6">
-                  <dt className="font-display text-2xl font-semibold text-foreground sm:text-3xl">
-                    {s.k}
-                  </dt>
-                  <dd className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
-                    {s.v}
-                  </dd>
-                </div>
-              ))}
-            </dl>
           </div>
 
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
