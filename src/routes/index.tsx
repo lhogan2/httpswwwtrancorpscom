@@ -147,20 +147,20 @@ function Hero() {
                 className="mx-auto aspect-[3/2] w-full max-w-sm rounded-lg object-cover"
               />
               <div className="mt-8 grid grid-cols-2 gap-3">
-                <div className="rounded-lg border border-border bg-background p-4">
-                  <Cpu className="h-5 w-5 text-brand" />
-                  <p className="mt-3 font-display text-sm font-semibold">Information Technology</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Modernization, cloud & cybersecurity advisory.
-                  </p>
-                </div>
-                <div className="rounded-lg border border-border bg-background p-4">
-                  <Radio className="h-5 w-5 text-brand" />
-                  <p className="mt-3 font-display text-sm font-semibold">Telecommunications</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Networks, voice systems & carrier engagement.
-                  </p>
-                </div>
+                {[
+                  { icon: Calendar, label: "Established", value: "2021" },
+                  { icon: MapPin, label: "Located in", value: "Haymarket, VA" },
+                  { icon: Briefcase, label: "Structure", value: "Sub-contractor" },
+                  { icon: CheckCircle2, label: "Engagement", value: "Owner-led" },
+                ].map((f) => (
+                  <div key={f.label} className="rounded-lg border border-border bg-background p-4">
+                    <f.icon className="h-5 w-5 text-brand" />
+                    <p className="mt-3 text-[11px] uppercase tracking-wider text-muted-foreground">
+                      {f.label}
+                    </p>
+                    <p className="font-display text-sm font-semibold">{f.value}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -218,14 +218,7 @@ function About() {
           </div>
 
           <div className="min-w-0">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Fact icon={Calendar} label="Established" value="2021" />
-              <Fact icon={MapPin} label="Located in" value="Haymarket, VA" />
-              <Fact icon={Briefcase} label="Structure" value="Sub-contractor" />
-              <Fact icon={CheckCircle2} label="Engagement" value="Owner-led" />
-            </div>
-
-            <div className="mt-10 space-y-px overflow-hidden rounded-2xl border border-border bg-border">
+            <div className="space-y-px overflow-hidden rounded-2xl border border-border bg-border">
               {services.map((s) => (
                 <div
                   key={s.title}
