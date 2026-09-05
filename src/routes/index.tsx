@@ -146,22 +146,6 @@ function Hero() {
                 aria-hidden="true"
                 className="mx-auto aspect-[3/2] w-full max-w-sm rounded-lg object-cover"
               />
-              <div className="mt-8 grid grid-cols-2 gap-3">
-                {[
-                  { icon: Calendar, label: "Established", value: "2021" },
-                  { icon: MapPin, label: "Located in", value: "Haymarket, VA" },
-                  { icon: Briefcase, label: "Structure", value: "Sub-contractor" },
-                  { icon: CheckCircle2, label: "Engagement", value: "Owner-led" },
-                ].map((f) => (
-                  <div key={f.label} className="rounded-lg border border-border bg-background p-4">
-                    <f.icon className="h-5 w-5 text-brand" />
-                    <p className="mt-3 text-[11px] uppercase tracking-wider text-muted-foreground">
-                      {f.label}
-                    </p>
-                    <p className="font-display text-sm font-semibold">{f.value}</p>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -192,6 +176,13 @@ function About() {
     },
   ];
 
+  const facts = [
+    { icon: Calendar, label: "Established", value: "2021" },
+    { icon: MapPin, label: "Located in", value: "Haymarket, VA" },
+    { icon: Briefcase, label: "Structure", value: "Sub-contractor" },
+    { icon: CheckCircle2, label: "Engagement", value: "Owner-led" },
+  ];
+
   return (
     <section id="about" aria-labelledby="about-heading" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
@@ -208,12 +199,19 @@ function About() {
               of a true partner.
             </p>
 
-            <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-surface">
-              <div className="flex aspect-[4/3] w-full items-center justify-center bg-surface">
-                <span className="font-display text-sm uppercase tracking-wider text-muted-foreground">
-                  Founder · Principal Consultant
-                </span>
-              </div>
+            <div
+              className="mt-8 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-surface p-6 sm:p-8"
+              style={{ boxShadow: "var(--shadow-card)" }}
+            >
+              {facts.map((f) => (
+                <div key={f.label} className="rounded-lg border border-border bg-background p-4">
+                  <f.icon className="h-5 w-5 text-brand" />
+                  <p className="mt-3 text-[12px] uppercase tracking-wider text-muted-foreground">
+                    {f.label}
+                  </p>
+                  <p className="font-display text-sm font-semibold">{f.value}</p>
+                </div>
+              ))}
             </div>
           </div>
 
