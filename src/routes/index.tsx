@@ -244,7 +244,7 @@ function About() {
 
 function Contact() {
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="relative py-24 sm:py-32">
+    <section id="contact" aria-labelledby="contact-heading" className="relative pb-24 pt-12 sm:pb-32 sm:pt-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10">
         <div
           className="relative overflow-hidden rounded-3xl border border-border bg-surface p-6 sm:p-12 lg:p-16"
