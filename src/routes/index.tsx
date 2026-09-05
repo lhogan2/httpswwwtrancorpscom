@@ -216,11 +216,11 @@ function About() {
           </div>
 
           <div className="min-w-0">
-            <div className="space-y-px overflow-hidden rounded-2xl border border-border bg-border">
+            <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-border">
               {services.map((s) => (
                 <div
                   key={s.title}
-                  className="group flex gap-5 bg-background p-6 transition-colors duration-300 hover:bg-surface sm:p-7"
+                  className="group flex flex-1 items-center gap-5 bg-background p-6 transition-colors duration-300 hover:bg-surface sm:p-7"
                 >
                   <div className="grid h-11 w-11 shrink-0 place-items-center rounded-md border border-brand/30 bg-brand/10 text-brand transition-transform duration-300 group-hover:scale-105">
                     <s.icon className="h-5 w-5" />
@@ -234,7 +234,6 @@ function About() {
                 </div>
               ))}
             </div>
-
           </div>
         </div>
       </div>
@@ -245,7 +244,7 @@ function About() {
 
 function Contact() {
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="relative py-24 sm:py-32">
+    <section id="contact" aria-labelledby="contact-heading" className="relative pb-24 pt-12 sm:pb-32 sm:pt-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10">
         <div
           className="relative overflow-hidden rounded-3xl border border-border bg-surface p-6 sm:p-12 lg:p-16"
