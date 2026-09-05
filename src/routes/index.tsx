@@ -263,19 +263,6 @@ function Contact() {
               within one business day.
             </p>
 
-            <ul className="mt-8 space-y-3 text-sm">
-              {[
-                "Owner-led communication — no account managers in the middle.",
-                "Specialized in IT & Telecommunications engagements.",
-                "Based in Haymarket, VA — serving clients nationwide.",
-              ].map((b) => (
-                <li key={b} className="flex items-start gap-3 text-muted-foreground">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-
             <a
               href="https://trancorps.zohorecruit.com/jobs/Careers"
               target="_blank"
